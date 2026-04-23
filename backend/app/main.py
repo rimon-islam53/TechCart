@@ -4,20 +4,12 @@ import bcrypt
 
 app = FastAPI()
 
-# Fake in-memory database (replace with PostgreSQL later)
 users_db = {}
 
-# ----------------------
-# Models
-# ----------------------
 class User(BaseModel):
     username: str
     password: str
 
-
-# ----------------------
-# Helper Functions
-# ----------------------
 def hash_password(password: str):
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
@@ -25,13 +17,9 @@ def verify_password(password: str, hashed_password: bytes):
     return bcrypt.checkpw(password.encode(), hashed_password)
 
 
-# ----------------------
-# Routes
-# ----------------------
-
 @app.get("/")
 def root():
-    return {"message": "Auth API running 🚀"}
+    return {"message": "Auth API running"}
 
 
 @app.post("/register")
